@@ -1,0 +1,8 @@
+* {margin: 0px; padding: 0px;}
+div.banner, a, h1 {display: inline-block;}
+div.banner a {margin-left: 300px; vertical-align: top;}
+div.wish {width: 400px; height: 300px; margin-top: 50px;}
+div.form-group, input, label {margin-top: 20px;}
+div.wish button {margin-top: 20px;}
+div.banner {margin-top: 50px;}
+div.errors {color: red; margin-top: 20px;}

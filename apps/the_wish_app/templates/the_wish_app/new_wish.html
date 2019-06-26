@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Wishing App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'the_wish_app/css/new_style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1 class="welcome">Hello, {{first_name}}! Make a wish!</h2>
+            <a class="logout" href="/logout">Logout</a>
+        </div>
+        <div class="errors">
+            {% if messages %}
+            <!-- <h6>Found Errors!</h6> -->
+                <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <p>{{ message }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="wish">
+            <form action="/wishes/add" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="inlineFormInput">I wish for:</label>
+                    <input type="text" class="form-control" id="inlineFormInput" placeholder="Item" name="item">
+                    <label for="inlineFormInput">Description</label>
+                    <input type="text" class="form-control" id="inlineFormInput" placeholder="Description" name="description">
+                    <input type="hidden" name="user_id" value="{{user_id}}">
+                </div>
+                <span><button type="submit" class="btn btn-secondary" formaction="/wishes/">Cancel</button></span>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

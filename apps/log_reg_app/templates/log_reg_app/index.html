@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login & Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'log_reg_app/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="registration">
+            <h2>Welcome</h2>
+            <form action="/process/registration" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="inlineFormInput">First Name</label>
+                    <input type="text" class="form-control" id="inlineFormInput" placeholder="First Name" name="first_name">
+                    <label for="inlineFormInput">Last Name</label>
+                    <input type="text" class="form-control" id="inlineFormInput" placeholder="Last Name" name="last_name">
+                    <label for="inlineFormInput">Birthday</label>
+                    <input type="date" class="form-control" id="inlineFormInput" placeholder="birthday" name="birthday">
+                    <small id="emailHelp" class="form-text text-muted">Required for age verification</small>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail4">Email address</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Enter email" name="email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password">
+                    <label for="inputPassword4">Confirm Password</label>
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Confirm Password" name="confirm_pw">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+        <div class="login">
+            <h2>Login</h2>
+            <form action="/process/login" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="messages">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

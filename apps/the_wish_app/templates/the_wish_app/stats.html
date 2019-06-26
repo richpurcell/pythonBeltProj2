@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Wishing App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'the_wish_app/css/stats_style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1 class="welcome">Hello, {{first_name}}!  These are your stats!</h2>
+            <a class="dashboard" href="/wishes/">Dashboard</a>
+            <a class="logout" href="/logout">Logout</a>
+        </div>
+        <div class="total_stats">
+            <h5>Total wishes granted so far for all users: {{total}}</h5>
+        </div>
+        <div class="my_stats">
+            <p>Your granted wishes: {{my_wishes}}</p>
+            <p>Your pending wishes: {{my_pendding}}</p>
+        </div>
+    </div>
+</body>
+</html>

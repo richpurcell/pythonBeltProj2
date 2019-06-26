@@ -1,0 +1,9 @@
+* {margin: 0px; padding: 0px;}
+div.container {height: 800px; width: 900px;}
+div.registration, div.login {display: inline-block; vertical-align: top; padding: 40px 0px;}
+div.login {margin-left: 200px;}
+div.registration input, h2, button {display: block; }
+h2 {margin-bottom: 40px;}
+div.messages {display: block; margin-left: 0px;}
+
+

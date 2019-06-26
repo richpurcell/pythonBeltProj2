@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Wishing App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'the_wish_app/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1 class="welcome">Hello, {{first_name}}!</h2>
+            <a class="logout" href="/logout">Logout</a>
+            <div class="stats">
+                <form action="/wishes/stats" method="post">{% csrf_token %} <p><button type="submit" class="btn btn-primary">View stats</button></p></form>
+            </div>
+            <div class="make_wish">
+                <form action="/wishes/new" method="post">{% csrf_token %} <p><button type="submit" class="btn btn-primary">Make a  wish!</button></p></form>
+            </div>
+        </div>
+        <div class="my_wishes">
+            <h3>Your wish list</h3>
+                <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Date added</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for wish in my_wishes %}
+                    <tr>
+                        <td>{{wish.item}}</td>
+                        <td>{{wish.date_added}}</td>
+                        <td><span><a href="/wishes/remove/{{wish.id}}">Remove</a> | <a href="/wishes/edit/{{wish.id}}">Edit</a> | <a href="/wishes/granted/{{wish.id}}">Granted!</a></span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="other_wishes">
+            <h3>Granted wishes</h3>
+            <div class="errors">
+                {% if messages %}
+                <!-- <h6>Found Errors!</h6> -->
+                    <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        <p>{{ message }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Wisher</th>
+                        <th scope="col">Date added</th>
+                        <th scope="col">Date granted</th>
+                        <th scope="col">Likes</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for wish in other_wishes %}
+                    <tr>
+                        <td>{{wish.item}}</td>
+                        <td>{{wish.first_name}}</td>
+                        <td>{{wish.date_added}}</td>
+                        <td>{{wish.date_granted}}</td>
+                        <td>{{wish.likes}}</td>
+                        {% if user_id != wish.user_id %}
+                        <td><span><form action="/wishes/like/{{wish.id}}" method="post">{% csrf_token %} <input type="hidden" name="user_id" value="{{user_id}}"> <input type="hidden" name="wish_id" value="{{wish.id}}"> <p><button type="submit" class="btn">Like</button></p></form></span></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

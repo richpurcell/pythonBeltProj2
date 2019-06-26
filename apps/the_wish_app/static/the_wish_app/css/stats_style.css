@@ -1,0 +1,7 @@
+* {margin: 0px; padding: 0px;}
+div.baanner a, h1 {display: inline-block; vertical-align: top; }
+div.banner {margin-top: 50px;}
+.dashboard {margin-left: 200px;}
+.logout {margin-left: 50px;}
+div.total_stats {margin-top: 50px;}
+div.my_stats {margin-top: 50px;}

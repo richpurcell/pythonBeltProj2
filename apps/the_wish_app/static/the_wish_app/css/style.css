@@ -1,0 +1,9 @@
+* {margin: 0px; padding: 0px;}
+div.banner, h1, a, div.make_wish, div.stats {display: inline-block; vertical-align: top; margin-top: 40px;}
+div.make_wish, div.stats {margin-left: 40px;}
+div.banner a {margin-left: 480px;}
+div.banner div.make_wish div.stats{margin-left: 480px;}
+td span a {display: inline;}
+div.my_wishes {margin-top: 50px;}
+div.other_wishes {margin-top: 50px;}
+div.errors {color: red;}
